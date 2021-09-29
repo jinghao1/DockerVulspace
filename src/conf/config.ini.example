@@ -1,0 +1,18 @@
+[mysql]
+host = mysql-server
+port = mysql-port
+name = database_name
+user = mysql_username
+password = mysql_password
+
+[postgresql]
+host = mysql-server
+port = mysql-port
+name = database_name
+user = mysql_username
+password = mysql_password
+
+
+[other]
+domain = http://localhost.domain/
+demo_session_cookie_domain = .huoxian.cn
