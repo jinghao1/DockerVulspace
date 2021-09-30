@@ -1,3 +1,4 @@
+
 import builtins
 import inspect
 from typing import TextIO
@@ -14,13 +15,13 @@ from demo.common import SerializerJsonResponse
 @extend_schema_with_envcheck([_SqlArgsSerializer],
                              response_schema=_SuccessSerializer,
                              summary=_('mysql Execute mysql.execute'),
-                             description=_("Execute custom SQL statements;eg: mysql=song"),
+                             description=_("Execute custom SQL statements;eg: name=song"),
                              tags=[_('mysql-injection')])
 @api_view(['POST'])
 def mysql_post_e(request):
     ser = _SqlArgsSerializer(data=request.POST)
     if ser.is_valid(True):
-        sqlQuery = ser.validated_data['mysql']
+        sqlQuery = ser.validated_data['name']
     else:
         return SerializerJsonResponse(None, 202, "params error")
     with connections['default'].cursor() as cursor:
@@ -62,13 +63,13 @@ def mysql_post_many(request):
 @extend_schema_with_envcheck([_SqlArgsSerializer],
                              response_schema=_SuccessSerializer,
                              summary=_('sqlite3 excute injection  '),
-                             description=_("Execute custom SQL statements;eg: mysql=song"),
+                             description=_("Execute custom SQL statements;eg: name=song"),
                              tags=[_('mysql-injection')])
 @api_view(['POST'])
 def sql_post_r(request):
     ser = _SqlArgsSerializer(data=request.POST)
     if ser.is_valid(True):
-        sqlQuery = ser.validated_data['mysql']
+        sqlQuery = ser.validated_data['name']
     else:
         return SerializerJsonResponse(None, 202, "params error")
 
@@ -135,14 +136,14 @@ def no_hook_fun(request):
 @extend_schema_with_envcheck([_SqlArgsSerializer],
                              response_schema=_SuccessSerializer,
                              summary=_('pysql execute   '),
-                             description=_("Execute custom SQL of pysql statements ;eg: mysql=song"),
+                             description=_("Execute custom SQL of pysql statements ;eg: name=song"),
                              tags=[_('mysql-injection')])
 @api_view(['POST'])
 def pysql_post_excute(request):
 
     ser = _SqlArgsSerializer(data=request.POST)
     if ser.is_valid(True):
-        sqlQuery = ser.validated_data['mysql']
+        sqlQuery = ser.validated_data['name']
     else:
         return SerializerJsonResponse(None, 202, "params error")
     with connections['pysql'].cursor() as cursor:
@@ -183,3 +184,5 @@ def pysql_post_many(request):
 
     print("----------")
     return SerializerJsonResponse(exec_end)
+
+

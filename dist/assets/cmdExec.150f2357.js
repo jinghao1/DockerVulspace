@@ -1,0 +1,1 @@
+import{s as e}from"./request.ceb0393e.js";const o=o=>e({url:"/demo/cmd_exec",method:"POST",data:o}),s=o=>e({url:"/demo/exec_post_e",method:"POST",data:o}),t=o=>e({url:"/demo/exec_post_popen",method:"POST",data:o}),a=o=>e({url:"/demo/exec_post_subprocess",method:"POST",data:o});export{a,s as b,o as c,t as e};

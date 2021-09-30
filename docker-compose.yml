@@ -1,8 +1,10 @@
 version: '3.4'
 
 volumes:
-  mysite.db.volume:
-    name: mysite.db.volume
+  mysite.mysqldb.volume:
+    name: mysite.mysqldb.volume
+  mysite.postgresdb.volume:
+    name: mysite.postgresdb.volume
 
 services:
   nginx:
@@ -14,6 +16,7 @@ services:
       - ./nginx/conf:/etc/nginx/conf.d
       - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
       - ./static:/static
+      - ./dist:/var/www/html
     depends_on:
       - web
 
@@ -26,8 +29,8 @@ services:
       MYSQL_ROOT_PASSWORD: mysitepass
       TZ: 'Asia/Shanghai'
     volumes:
-      - mysite.db.volume:/var/lib/mysql
-      - ./mysql:/docker-entrypoint-initdb.d
+      - mysite.mysqldb.volume:/var/lib/mysql
+      - ./mysql:/docker-entrypoint-initdb.d/
 
   postgresql:
     image: postgres
@@ -40,7 +43,8 @@ services:
       POSTGRES_PASSWORD: "mysitepass"
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --locale=C"
     volumes:
-      - mysite.db.volume:/var/lib/mysql/postgresql/data
+      - mysite.postgresdb.volume:/var/lib/postgresql
+      - ./postgresql/create_init.sh:/docker-entrypoint-initdb.d/create_init.sh
 
   web:
     build: ./web
@@ -48,8 +52,9 @@ services:
     command: uwsgi --socket :8001 --module mysite.wsgi
     volumes:
       - ./src:/code
+      - ./config.json:/code/dongtai_agent_python/config.json
       - ./static:/static
     expose:
       - "8001"
     depends_on:
-      - db
+      - mysqldb

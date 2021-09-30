@@ -34,15 +34,9 @@ class FireMiddleware(MiddlewareMixin):
             logger.error("python agent register error ")
 
         dt_global_var.dt_set_value("agent_id", dt_agent_id)
-        dt_config = dt_global_var.dt_get_value("config_data")
         print("------begin hook-----")
         enable_patches("django")
         logger.info("python agent hook open")
-        # if dt_config.get("iast", {}).get("allhook", {}).get("enable", True):
-        #     enable_patches()
-        #     logger.info("python agent hook open")
-        # else:
-        #     logger.info("python agent hook close")
 
     def process_request(self, request):
         # '''产生request对象后，url匹配之前调用'''
@@ -55,8 +49,7 @@ class FireMiddleware(MiddlewareMixin):
         if request.META.get("QUERY_STRING", ""):
             http_url += "?" + request.META.get("QUERY_STRING", "")
         http_req_header = self.agent_upload.agent_json_to_str(dict(request.headers))
-        # print("request=====body")
-        # print(request.body)
+
         if request.body and isinstance(request.body, str):
             reqeust_body = str(request.body, encoding="utf-8")
         else:
@@ -87,10 +80,6 @@ class FireMiddleware(MiddlewareMixin):
         dt_global_var.dt_set_value("hook_exit", False)
         logger.info("hook request api success")
 
-    # def process_view(self, request, view_func, *view_args, **view_kwargs):
-    #     # '''url匹配之后，视图函数调用之前'''
-    #     print('--process_view_name--')
-
     def process_response(self, request, response):
         # '''视图函数调用之后，内容返回浏览器之前'''
         dt_global_var.dt_set_value("dt_open_pool", False)
@@ -99,7 +88,9 @@ class FireMiddleware(MiddlewareMixin):
         else:
             http_res_body = ""
         dt_tracker_set("http_res_body", http_res_body)
-        http_res_header = self.agent_upload.agent_json_to_str(dict(response.headers))
+        resp_header = dict(response.headers)
+        resp_header['agent_id'] = dt_global_var.dt_get_value("agent_id")
+        http_res_header = self.agent_upload.agent_json_to_str(resp_header)
         dt_tracker_set("http_res_header", http_res_header)
         logger.info("hook api response success")
 

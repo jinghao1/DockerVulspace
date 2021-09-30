@@ -7,21 +7,6 @@ from dongtai_agent_python.common.logger import logger_config
 import json,flask
 logger = logger_config("python_agent")
 
-# def multiToList(request):
-#
-#     comment = []
-#     val_arr = dict(request.values)
-#     json_arr = request.json
-#     if val_arr:
-#         for item in val_arr:
-#             # print(item)
-#             comment.append(val_arr[item])
-#     if json_arr:
-#         for item in json_arr:
-#             comment.append(json_arr[item])
-#
-#     return comment
-
 
 class AgentTest(object):
     def __init__(self, old_app):
@@ -64,9 +49,7 @@ class AgentMiddleware(object):
 
         @app.before_request
         def process_request_hook(*args, **kwargs):
-            print("before_request=====")
-            print("=====")
-            # print(request)
+
             request_body = {}
             if request.is_json and request.json:
                 request_body = request.json
@@ -97,18 +80,21 @@ class AgentMiddleware(object):
                 "http_req_header": http_req_header,
                 "http_body": request_body,
                 "http_scheme": request.scheme,
+                "dt_pool_args": [],
+                "dt_data_args": [],
+                "upload_pool": True,
             }
             for key in need_to_set.keys():
                 dt_tracker_set(key, need_to_set[key])
+
             dt_global_var.dt_set_value("dt_open_pool", True)
-            dt_tracker_set("dt_pool_args", [])
-            dt_tracker_set("dt_data_args", [])
-            dt_tracker_set("upload_pool", True)
+            dt_global_var.dt_set_value("have_hooked", [])
+            dt_global_var.dt_set_value("hook_exit", False)
             logger.info("hook request api success")
 
         @app.after_request
         def process_response_hook(response):
-            print('process_response1 执行===')
+
             dt_global_var.dt_set_value("dt_open_pool", False)
             if response.data and isinstance(response.data, str):
                 http_res_body = str(response.data, encoding="utf-8")
