@@ -176,19 +176,7 @@
 			
 			"value": "builtins.str.join",
 			"inherit": "false"
-		}, {
-			
-			"track": "false",
-			
-			"value": "demo.views.func2",
-			"inherit": "false"
-		}, {
-			
-			"track": "false",
-			
-			"value": "demo.views.func3_open",
-			"inherit": "false"
-		}, {
+		},  {
 			
 			"track": "false",
 			

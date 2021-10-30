@@ -30,9 +30,10 @@ def enable_patches(cur_frame_app="django"):
                 for item in rules['details']:
                     policy = item['value']
                     policy_arr = policy.split(".")
+                    if policy_arr[0] in frame_app and policy_arr[0] != cur_frame_app:
+                        continue
                     try:
-                        if policy_arr[0] in frame_app and policy_arr[0] != cur_frame_app:
-                            continue
+
                         imp_arr = copy.deepcopy(policy_arr)
                         method_name = imp_arr[-1]
                         policy_global[method_name] = rules['type']
@@ -92,6 +93,7 @@ def enable_patches(cur_frame_app="django"):
     dt_global_var.dt_set_value("policy",  policy_global)
     print("hook == success")
     magic_flush_mro_cache()
+
 
 
 
