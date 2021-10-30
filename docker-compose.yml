@@ -60,3 +60,18 @@ services:
     depends_on:
       - mysqldb
       - postgresql
+  flaskweb:
+    build: ./flaskweb
+    container_name: mysite.flaskweb
+    command: ["/wait-for-it.sh", "mysqldb:3306"]
+    volumes:
+      - ./wait-for-it.sh:/wait-for-it.sh
+      - ./flasksrc:/code
+      - ./config.json:/code/dongtai_agent_python/config.json
+      - ./static:/static
+    ports:
+      - 5000:5000
+    depends_on:
+      - mysqldb
+      - postgresql
+    restart: always
