@@ -74,7 +74,7 @@ def sql_post_r(request):
         return SerializerJsonResponse(None, 202, "params error")
 
     with connections['sqlite3'].cursor() as cursor:
-        execEnd = cursor.execute("select phone from user where name= %s", [sqlQuery])
+        execEnd = cursor.execute("select phone from suser where name= %s", [sqlQuery])
         endData = cursor.fetchone()
     print("----------")
     print(execEnd)
@@ -97,7 +97,7 @@ def sql_post_executemany_sql(request):
     else:
         return SerializerJsonResponse(None, 202, "params error")
 
-    sql = "insert into user (name, phone) values (?, ?);"
+    sql = "insert into suser (name, phone) values (?, ?);"
     data_list = [('张三1', phone1), ('李四1', 16655443311)]
     with connections['sqlite3'].cursor() as cursor:
         end = cursor.executemany(sql, data_list)
@@ -119,7 +119,7 @@ def sql_post_executescript(request):
         name = ser.validated_data['name']
     else:
         return SerializerJsonResponse(None, 202, "params error")
-    sql_script = "update user set name='{}' where phone={}".format(name,phone1)
+    sql_script = "update suser set name='{}' where phone={}".format(name,phone1)
     print(sql_script)
     with connections['sqlite3'].cursor() as cursor:
         end = cursor.executescript(sql_script)
@@ -147,7 +147,7 @@ def pysql_post_excute(request):
     else:
         return SerializerJsonResponse(None, 202, "params error")
     with connections['pysql'].cursor() as cursor:
-        execEnd = cursor.execute("select phone from muser where name=%s",[sqlQuery])
+        execEnd = cursor.execute("select phone from puser where name=%s",[sqlQuery])
         endData = cursor.fetchone()
     print("----------")
     print(execEnd)
@@ -174,7 +174,7 @@ def pysql_post_many(request):
 
     with connections['pysql'].cursor() as cursor:
 
-        sql = "insert into muser(id, name, phone) values( %s,  %s, %s) "
+        sql = "insert into puser(id, name, phone) values( %s,  %s, %s) "
         args = [(userId, userName, "100"), (str(int(userId)+1), "name1", userPhone)]
         try:
             exec_end = cursor.executemany(sql, args)

@@ -59,3 +59,4 @@ services:
       - "8001"
     depends_on:
       - mysqldb
+      - postgresql
