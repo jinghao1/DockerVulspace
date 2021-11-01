@@ -5,6 +5,7 @@ from demo import views
 from demo.sql_injection import sql_api
 from demo.exec_code import exec_api
 from demo.exec_command import cmd_api
+from demo.xss import xss_fun
 
 
 DIR_PATH = dirname(realpath(__file__))
@@ -34,5 +35,13 @@ def setup_routes(app):
     # code exec
     app.add_url_rule("/demo/eval_post_e", view_func=exec_api.eval_post_e, methods=["POST"])
     app.add_url_rule("/demo/yaml_post_e", view_func=exec_api.yaml_post_e, methods=["POST"])
+
+    # xss
+    # safe
+    app.add_url_rule("/demo/xss_template", view_func=xss_fun.xssTemplate, methods=["GET"])
+    # safe
+    app.add_url_rule("/demo/xss_template_string", view_func=xss_fun.xssTemplateString, methods=["GET"])
+    # have vul
+    app.add_url_rule("/demo/xss_return", view_func=xss_fun.xssReturn, methods=["GET"])
 
 
