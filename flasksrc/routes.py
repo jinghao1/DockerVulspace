@@ -6,6 +6,7 @@ from demo.sql_injection import sql_api
 from demo.exec_code import exec_api
 from demo.exec_command import cmd_api
 from demo.xss import xss_fun
+from demo.xxe import xxe_fun
 
 
 DIR_PATH = dirname(realpath(__file__))
@@ -43,5 +44,8 @@ def setup_routes(app):
     app.add_url_rule("/demo/xss_template_string", view_func=xss_fun.xssTemplateString, methods=["GET"])
     # have vul
     app.add_url_rule("/demo/xss_return", view_func=xss_fun.xssReturn, methods=["GET"])
+
+    # xxe have vul
+    app.add_url_rule("/demo/xxe_login", view_func=xxe_fun.doLoginXXE, methods=["POST"])
 
 
