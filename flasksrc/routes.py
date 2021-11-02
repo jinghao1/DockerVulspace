@@ -1,12 +1,11 @@
 from os.path import dirname, join, realpath
-
-
 from demo import views
 from demo.sql_injection import sql_api
 from demo.exec_code import exec_api
 from demo.exec_command import cmd_api
 from demo.xss import xss_fun
 from demo.xxe import xxe_fun
+from demo.ssrf import ssrf_fun
 
 
 DIR_PATH = dirname(realpath(__file__))
@@ -47,5 +46,9 @@ def setup_routes(app):
 
     # xxe have vul
     app.add_url_rule("/demo/xxe_login", view_func=xxe_fun.doLoginXXE, methods=["POST"])
+
+    # ssrf urllib
+    app.add_url_rule("/demo/urllib_ssrf", view_func=ssrf_fun.urllib_ssrf, methods=["GET"])
+    app.add_url_rule("/demo/request_ssrf", view_func=ssrf_fun.request_ssrf, methods=["GET"])
 
 
