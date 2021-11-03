@@ -16,6 +16,7 @@ def urllib_ssrf():
         # print(e)
     return {"status": 201,"result": info}
 
+
 # url=http://192.168.2.168
 # 内网遍历
 def request_ssrf():

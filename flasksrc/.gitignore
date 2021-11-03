@@ -5,7 +5,9 @@ __pycache__/
 
 # C extensions
 *.so
-
+*.log
+db.sqlite3
+dongtai_agent_python/
 # Distribution / packaging
 .Python
 build/
