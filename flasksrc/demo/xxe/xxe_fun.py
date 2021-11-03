@@ -20,6 +20,7 @@ def doLoginXXE():
     result = None
     try:
         # 漏洞修复--禁用外部实体  resolve_entities=False
+        etree.XMLParser
         # tree = etree.fromstring(request.data,etree.XMLParser(resolve_entities=False))
         tree = etree.fromstring(request.data)  # 有漏洞
         # 遍历xml结构内容

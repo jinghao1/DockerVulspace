@@ -18,7 +18,7 @@ services:
       - ./static:/static
       - ./dist:/var/www/html
     depends_on:
-      - web
+      - djangoweb
 
   mysqldb:
     image: mysql:5.7
@@ -46,13 +46,13 @@ services:
       - mysite.postgresdb.volume:/var/lib/postgresql
       - ./postgresql/create_init.sh:/docker-entrypoint-initdb.d/create_init.sh
 
-  web:
-    build: ./web
-    container_name: mysite.web
+  djangoweb:
+    build: ./djangosrc
+    container_name: mysite.djangoweb
     command: ["/wait-for-it.sh", "mysqldb:3306", "--", "uwsgi", "--socket", ":8001", "--module", "mysite.wsgi"]
     volumes:
       - ./wait-for-it.sh:/wait-for-it.sh
-      - ./src:/code
+      - ./djangosrc:/code
       - ./config.json:/code/dongtai_agent_python/config.json
       - ./static:/static
     expose:
@@ -71,8 +71,8 @@ services:
       - ./flasksrc:/code
       - ./config.json:/code/dongtai_agent_python/config.json
       - ./static:/static
-    ports:
-      - 5000:5000
+    expose:
+      - "5000"
     depends_on:
       - mysqldb
       - postgresql

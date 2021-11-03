@@ -11,9 +11,9 @@ from demo.global_var import dt_get_value
 def mysql_post_e():
     db = dt_get_value("db")
     app = dt_get_value("app")
-    sqlQuery = request.form['sql']
-
-    rows = db.session.execute("select phone from muser where name=:name_1", {"name_1": sqlQuery}, bind=db.get_engine(app, 'mysqlDb'))
+    sqlname = request.form['sql']
+    sqlQuery = "select phone from muser where name=%s".format(sqlname)
+    rows = db.session.execute(sqlQuery, bind=db.get_engine(app, 'mysqlDb'))
     if rows:
         for line in rows:
             return SerializerJsonResponse({"phone": line[0]})
