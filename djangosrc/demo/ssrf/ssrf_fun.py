@@ -5,7 +5,6 @@ import ssl
 from demo.common import SerializerJsonResponse
 context = ssl._create_unverified_context()
 
-
 # eg:url=file:///etc/passwd
 def urllib_ssrf():
     url = request.args.get("url","https://www.baidu.com")
@@ -16,7 +15,7 @@ def urllib_ssrf():
     except urllib.error.URLError as e:
         info = str(e)
         # print(e)
-    return SerializerJsonResponse(info)
+    return SerializerJsonResponse({"status": 201,"result": info})
 
 
 # url=http://192.168.2.168
@@ -29,4 +28,4 @@ def request_ssrf():
     except Exception as e:
         info = str(e)
     # print(info)
-    return SerializerJsonResponse(info)
+    return SerializerJsonResponse({"status": 201, "result": info})

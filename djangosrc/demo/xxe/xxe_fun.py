@@ -41,6 +41,7 @@ def doLoginXXE():
         result = "<result><code>%d</code><msg>%s</msg></result>".format(3, str(Ex))
     end = {
         "result": result,
+        "status": 201,
         "header": {'Content-Type': 'text/xml;charset=UTF-8'}
     }
     return SerializerJsonResponse(end)
