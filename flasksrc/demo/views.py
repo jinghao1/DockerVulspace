@@ -1,6 +1,5 @@
 import json,os,time
 from demo.common import SerializerJsonResponse
-from aiohttp.web import Request, HTTPFound
 from flask import Flask,request
 
 def func(a, b):

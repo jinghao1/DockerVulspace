@@ -1,4 +1,6 @@
 from collections import namedtuple
+import json
+from flask import jsonify
 # from django.http import JsonResponse
 # from demo.serializer.serializers import _SuccessSerializer
 
@@ -11,5 +13,6 @@ def SerializerJsonResponse(endData=None, status=201, msg="success"):
         "msg": msg,
         "data": [endData]
     }
-    return res
+
+    return jsonify(res)
     # return JsonResponse(_SuccessSerializer(res).data)
