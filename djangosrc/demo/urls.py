@@ -3,6 +3,9 @@ from . import views
 from demo.exec_code import exec_api
 from demo.exec_command import cmd_api
 from demo.sql_injection import sql_api
+from demo.xss import xss_fun
+from demo.xxe import xxe_fun
+from demo.ssrf import ssrf_fun
 
 urlpatterns = [
     path('get_open', views.index_get_r),
@@ -25,4 +28,15 @@ urlpatterns = [
     # code exec
     path('eval_post_e', exec_api.eval_post_e),
     path('yaml_post_e', exec_api.yaml_post_e),
+    # xss
+    # safe
+    path('xss_template', xss_fun.xssTemplate),
+    # have vul
+    path('xss_return', xss_fun.xssReturn),
+
+    # xxe
+    path('xxe_login', xxe_fun.doLoginXXE),
+    # ssrf
+    path('urllib_ssrf', ssrf_fun.urllib_ssrf),
+    path('request_ssrf', ssrf_fun.request_ssrf),
 ]

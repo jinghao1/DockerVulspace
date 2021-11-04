@@ -20,7 +20,7 @@ psql -v ON_ERROR_STOP=1 -U mysiteuser mysite <<-EOSQL
       "name" varchar(255) COLLATE "pg_catalog"."default",
       "phone" varchar(255) COLLATE "pg_catalog"."default"
     ) ;
-    ALTER TABLE "public"."muser" OWNER TO "mysiteuser";
+    ALTER TABLE "public"."puser" OWNER TO "mysiteuser";
 
 
     BEGIN;

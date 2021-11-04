@@ -7,12 +7,13 @@ from demo.global_var import dt_get_value
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 # sql injection
-# Execute custom SQL statements;eg: sql=song
+# Execute custom SQL statements;eg: name=song
 def mysql_post_e():
     db = dt_get_value("db")
     app = dt_get_value("app")
-    sqlname = request.form['sql']
-    sqlQuery = "select phone from muser where name=%s".format(sqlname)
+    sqlname = request.form['name']
+    sqlQuery = "select phone from muser where name='{}'".format(sqlname)
+
     rows = db.session.execute(sqlQuery, bind=db.get_engine(app, 'mysqlDb'))
     if rows:
         for line in rows:
@@ -46,16 +47,16 @@ def mysql_post_many():
 
 
 # sqlite3 excute
-#         description=_("Execute custom SQL statements;eg: sql=song"),
+#         description=_("Execute custom SQL statements;eg: name=song"),
 def sql_post_r():
     db = dt_get_value("db")
     app = dt_get_value("app")
     ser = request.form
     if ser:
-        sqlQuery = ser['sql']
+        sqlQuery = "select phone from suser where name='{}'".format(ser['name'])
     else:
         return SerializerJsonResponse(None, 202, "params error")
-    rows = db.session.execute("select phone from suser where name=:name_1", {"name_1": sqlQuery}, bind=db.get_engine(app, 'mysqlDb'))
+    rows = db.session.execute(sqlQuery, bind=db.get_engine(app, 'sqlite3'))
 
     if rows:
         for line in rows:
@@ -102,10 +103,10 @@ def pysql_post_excute():
     app = dt_get_value("app")
     ser = request.form
     if ser:
-        sqlQuery = ser['sql']
+        sqlQuery = "select phone from puser where name='{}'".format(ser['name'])
     else:
         return SerializerJsonResponse(None, 202, "params error")
-    rows = db.session.execute("select phone from puser where name=:name_1", {"name_1": sqlQuery}, bind=db.get_engine(app, 'pySqlDb'))
+    rows = db.session.execute(sqlQuery, bind=db.get_engine(app, 'pySqlDb'))
     print(dir(db.session))
     if rows:
         for line in rows:

@@ -1,5 +1,5 @@
 from flask import Flask,render_template,request,render_template_string
-
+from demo.common import SerializerJsonResponse
 
 # safe
 def xssTemplate():
@@ -21,4 +21,4 @@ def xssTemplateString():
 # no safe
 def xssReturn():
     content = request.args.get("content", "null")
-    return content
+    return SerializerJsonResponse(content)

@@ -21,11 +21,11 @@ from demo.common import SerializerJsonResponse
 def mysql_post_e(request):
     ser = _SqlArgsSerializer(data=request.POST)
     if ser.is_valid(True):
-        sqlQuery = ser.validated_data['name']
+        sqlQuery = "select phone from muser where name='{}'".format(ser.validated_data['name'])
     else:
         return SerializerJsonResponse(None, 202, "params error")
     with connections['default'].cursor() as cursor:
-        execEnd = cursor.execute("select phone from muser where name= %s", [sqlQuery])
+        execEnd = cursor.execute(sqlQuery)
         endData = cursor.fetchone()
 
     return SerializerJsonResponse({"phone": endData[0]})
@@ -69,12 +69,13 @@ def mysql_post_many(request):
 def sql_post_r(request):
     ser = _SqlArgsSerializer(data=request.POST)
     if ser.is_valid(True):
-        sqlQuery = ser.validated_data['name']
+        sqlQuery = "select phone from suser where name='{}'".format(ser.validated_data['name'])
+
     else:
         return SerializerJsonResponse(None, 202, "params error")
 
     with connections['sqlite3'].cursor() as cursor:
-        execEnd = cursor.execute("select phone from suser where name= %s", [sqlQuery])
+        execEnd = cursor.execute(sqlQuery)
         endData = cursor.fetchone()
     print("----------")
     print(execEnd)
@@ -143,11 +144,11 @@ def pysql_post_excute(request):
 
     ser = _SqlArgsSerializer(data=request.POST)
     if ser.is_valid(True):
-        sqlQuery = ser.validated_data['name']
+        sqlQuery = "select phone from puser where name='{}'".format(ser.validated_data['name'])
     else:
         return SerializerJsonResponse(None, 202, "params error")
     with connections['pysql'].cursor() as cursor:
-        execEnd = cursor.execute("select phone from puser where name=%s",[sqlQuery])
+        execEnd = cursor.execute(sqlQuery)
         endData = cursor.fetchone()
     print("----------")
     print(execEnd)

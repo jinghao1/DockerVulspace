@@ -55,6 +55,7 @@ services:
       - ./djangosrc:/code
       - ./dongtai_agent_python:/code/dongtai_agent_python
       - ./static:/static
+      - ./sqlite/db.sqlite3:/code/db.sqlite3
     expose:
       - "8001"
     depends_on:
@@ -71,6 +72,7 @@ services:
       - ./flasksrc:/code
       - ./dongtai_agent_python:/code/dongtai_agent_python
       - ./static:/static
+      - ./sqlite/db.sqlite3:/code/db.sqlite3
     expose:
       - "5000"
     depends_on:

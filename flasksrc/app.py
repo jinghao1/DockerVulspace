@@ -6,11 +6,11 @@ from demo.global_var import dt_set_value
 app = Flask(__name__)
 curDir = os.path.dirname(__file__)
 
-sqlitePath = str(os.path.join(curDir, "../sqlite/db.sqlite3"))
+sqlitePath = str(os.path.join(curDir, "./db.sqlite3"))
 app.config['SQLALCHEMY_BINDS'] = {
     "sqlite3": "sqlite:///"+sqlitePath,
     "mysqlDb": "mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8mb4".format("mysiteuser", "mysitepass", "mysqldb", "3306", "mysite"),
-    "pySqlDb": "postgres://{}:{}@{}:{}/{}".format("mysiteuser", "mysitepass", "postgresql", "5432", "mysite")
+    "pySqlDb": "postgresql://{}:{}@{}:{}/{}".format("mysiteuser", "mysitepass", "postgresql", "5432", "mysite")
 }
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
