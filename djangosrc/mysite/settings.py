@@ -64,7 +64,7 @@ REST_FRAMEWORK = {
 
 
 MIDDLEWARE = [
-   # 'dongtai_agent_python.middlewares.django_middleware.FireMiddleware',
+    'dongtai_agent_python.middlewares.django_middleware.FireMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
