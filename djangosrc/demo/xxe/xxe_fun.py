@@ -1,4 +1,4 @@
-from flask import Flask, request
+from rest_framework.decorators import api_view
 from lxml import etree
 from demo.common import SerializerJsonResponse
 USERNAME = "username"
@@ -17,11 +17,11 @@ PASSWORD = "passWd"
 #     yzx
 #   </password>
 #  </user>
-def doLoginXXE():
-    result = None
+@api_view(['POST'])
+def doLoginXXE(request):
     try:
         # 漏洞修复--禁用外部实体  resolve_entities=False
-        etree.XMLParser
+
         # tree = etree.fromstring(request.data,etree.XMLParser(resolve_entities=False))
         tree = etree.fromstring(request.data)  # 有漏洞
         # 遍历xml结构内容
@@ -41,7 +41,6 @@ def doLoginXXE():
         result = "<result><code>%d</code><msg>%s</msg></result>".format(3, str(Ex))
     end = {
         "result": result,
-        "status": 201,
         "header": {'Content-Type': 'text/xml;charset=UTF-8'}
     }
     return SerializerJsonResponse(end)

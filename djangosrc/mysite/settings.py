@@ -87,7 +87,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS':  [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -103,7 +103,7 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 curDir = os.path.dirname(__file__)
-sqlitePath = str(os.path.join(curDir, "../../sqlite/db.sqlite3"))
+sqlitePath = str(os.path.join(curDir, "../db.sqlite3"))
 
 DATABASES = {
         'sqlite3': {

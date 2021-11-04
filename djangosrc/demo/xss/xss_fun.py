@@ -1,24 +1,17 @@
-from flask import Flask,render_template,request,render_template_string
+from django.shortcuts import render
 from demo.common import SerializerJsonResponse
-
-# safe
-def xssTemplate():
-    content = request.args.get("content","null")
-    return render_template('xss_index.html',contents=content)
+from rest_framework.decorators import api_view
 
 
 # safe
-def xssTemplateString():
-    message = request.args.get("content","null")
-    template = (
-        "<h2>{{ message }}</h2> "
-        "<p>Note: This feature is still early in development, "
-        "please reach out to Security if you have any feedback.</p>"
-    )
-    return render_template_string(template, message=message)
+@api_view(['GET'])
+def xssTemplate(request):
+    content = request.GET.get("content","null")
+    return render(request,'xss_index.html',{"contents":content})
 
 
 # no safe
-def xssReturn():
-    content = request.args.get("content", "null")
+@api_view(['GET'])
+def xssReturn(request):
+    content = request.GET.get("content", "null")
     return SerializerJsonResponse(content)
