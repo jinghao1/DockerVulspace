@@ -34,15 +34,11 @@ def doLoginXXE():
                 password = childa.text
                 print(password)
         if username == USERNAME and password == PASSWORD:
-            result = "<result><code>%d</code><msg>%s</msg></result>".format(1, username)
+            result = "<result><code>{}</code><msg>{}</msg></result>".format(1, username)
         else:
-            result = "<result><code>%d</code><msg>%s</msg></result>".format(0, username)
+            result = "<result><code>{}</code><msg>{}</msg></result>".format(0, username)
     except Exception as Ex:
-        result = "<result><code>%d</code><msg>%s</msg></result>".format(3, str(Ex))
-    end = {
-        "result": result,
-        "header": {'Content-Type': 'text/xml;charset=UTF-8'}
-    }
-    return SerializerJsonResponse(end)
+        result = "<result><code>{}</code><msg>{}</msg></result>".format(3, str(Ex))
+    return result
 
 
