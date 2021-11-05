@@ -15,7 +15,7 @@ services:
     volumes:
       - ./nginx/conf:/etc/nginx/conf.d
       - ./nginx/uwsgi_params:/etc/nginx/uwsgi_params
-      - ./static:/static
+
       - ./dist:/var/www/html
     depends_on:
       - djangoweb
@@ -54,7 +54,7 @@ services:
       - ./wait-for-it.sh:/wait-for-it.sh
       - ./djangosrc:/code
       - ./dongtai_agent_python:/code/dongtai_agent_python
-      - ./static:/static
+
       - ./sqlite/db.sqlite3:/code/db.sqlite3
     expose:
       - "8001"
@@ -71,7 +71,7 @@ services:
       - ./wait-for-it.sh:/wait-for-it.sh
       - ./flasksrc:/code
       - ./dongtai_agent_python:/code/dongtai_agent_python
-      - ./static:/static
+
       - ./sqlite/db.sqlite3:/code/db.sqlite3
     expose:
       - "5000"
