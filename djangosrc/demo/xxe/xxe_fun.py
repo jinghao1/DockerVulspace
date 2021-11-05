@@ -1,6 +1,7 @@
 from rest_framework.decorators import api_view
 from lxml import etree
-from demo.common import SerializerJsonResponse
+from django.http import HttpResponse
+
 USERNAME = "username"
 PASSWORD = "passWd"
 
@@ -23,7 +24,7 @@ def doLoginXXE(request):
         # 漏洞修复--禁用外部实体  resolve_entities=False
 
         # tree = etree.fromstring(request.data,etree.XMLParser(resolve_entities=False))
-        tree = etree.fromstring(request.data)  # 有漏洞
+        tree = etree.fromstring(request.body)  # 有漏洞
         # 遍历xml结构内容
         for childa in tree:
             print(childa.tag, childa.text, childa.attrib)
@@ -39,4 +40,4 @@ def doLoginXXE(request):
             result = "<result><code>{}</code><msg>{}</msg></result>".format(0, username)
     except Exception as Ex:
         result = "<result><code>{}</code><msg>{}</msg></result>".format(3, str(Ex))
-    return result
+    return HttpResponse(result)
