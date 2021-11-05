@@ -27,7 +27,11 @@ DockerVulspace 是一款由Python编写的靶场项目<br>
 git clone https://github.com/jinghao1/DockerVulspace.git
 cd DockerVulspace
 ```
-2.从iast官网页面下载agent，解压至 DockerVulspace
+2.从iast官网(https://iast.huoxian.cn/deploy)下载python-agent，解压后进入目录，将`dongtai_agent_python`文件夹copy至 `DockerVulspace/`目录下<br>
+注意：修改`dongtai_agent_python/config.json`中的`project.name`项目名称或者配置环境变量
+```shell script
+export projectName=demoProjectName
+```
 3.镜像搭建
 ```shell script
 docker-compose -p pythonVul build
