@@ -2,5 +2,5 @@
 *.pyo
 __pycache__
 dongtai_agent_python
-.idea
+.idea/
 
