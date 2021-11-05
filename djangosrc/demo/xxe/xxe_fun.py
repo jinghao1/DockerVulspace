@@ -1,6 +1,9 @@
 from rest_framework.decorators import api_view
 from lxml import etree
 from demo.common import SerializerJsonResponse
+from django.utils.translation import gettext_lazy as _
+from demo.utils import extend_schema_with_envcheck
+from demo.serializer.serializers import _WebSerializer,_SuccessSerializer
 USERNAME = "username"
 PASSWORD = "passWd"
 
@@ -17,13 +20,19 @@ PASSWORD = "passWd"
 #     yzx
 #   </password>
 #  </user>
+@extend_schema_with_envcheck([_WebSerializer],
+                             response_schema=_SuccessSerializer,
+                             summary=_('xxe return'),
+                             description=_("Execute xxe;#将结果展示到页面 eg: Content-Type=application/xml;charset=utf-8;  post body: <user><username>username</username><password>passWd</password></user>" ),
+                             tags=[_('xxe')])
 @api_view(['POST'])
 def doLoginXXE(request):
     try:
         # 漏洞修复--禁用外部实体  resolve_entities=False
-
         # tree = etree.fromstring(request.data,etree.XMLParser(resolve_entities=False))
         tree = etree.fromstring(request.data)  # 有漏洞
+        username = None
+        password = None
         # 遍历xml结构内容
         for childa in tree:
             print(childa.tag, childa.text, childa.attrib)

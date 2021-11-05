@@ -25,14 +25,16 @@ DockerVulspace 是一款由Python编写的靶场项目<br>
 1.代码拉取
 ```shell script
 git clone https://github.com/jinghao1/DockerVulspace.git
+cd DockerVulspace
 ```
-2.镜像搭建
+2.从iast官网页面下载agent，解压至 DockerVulspace
+3.镜像搭建
 ```shell script
 docker-compose -p pythonVul build
 ```
-3.服务启动
+4.服务启动
 ```shell script
 docker-compose -p pythonVul up
 ``` 
-4.浏览器直接访问
+5.浏览器直接访问
 http://127.0.0.1:8003
