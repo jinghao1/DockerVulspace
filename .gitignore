@@ -2,9 +2,9 @@
 *.pyo
 __pycache__
 
-dongtai_agent_python/
-
-dongtai_agent_python
 .idea/
 
+dongtai_agent_python/
+dongtai_agent_python
 
+docker-compose.override.yml

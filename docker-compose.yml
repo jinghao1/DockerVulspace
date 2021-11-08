@@ -47,7 +47,8 @@ services:
       - ./postgresql/create_init.sh:/docker-entrypoint-initdb.d/create_init.sh
 
   djangoweb:
-    build: ./djangosrc
+    build:
+      context: ./djangosrc
     container_name: mysite.djangoweb
     command: ["/wait-for-it.sh", "mysqldb:3306", "--", "uwsgi", "--socket", ":8001", "--module", "mysite.wsgi"]
     volumes:
@@ -61,8 +62,10 @@ services:
     depends_on:
       - mysqldb
       - postgresql
+
   flaskweb:
-    build: ./flasksrc
+    build:
+      context: ./flasksrc
     container_name: mysite.flaskweb
     environment:
       FLASK_APP: app.py
