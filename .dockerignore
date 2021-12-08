@@ -1,0 +1,10 @@
+*.log
+.idea
+.git
+__pycache__
+*.pyc
+
+DongTai-agent-python/build
+DongTai-agent-python/dist
+DongTai-agent-python/venv
+DongTai-agent-python/dongtai_agent_python/assess_ext/funchook/build

@@ -48,9 +48,11 @@ cd DockerVulspace
 
 ### 下载 Agent
 
-从 [IAST 官网](https://iast.huoxian.cn/deploy) 下载 Python Agent， 解压后进入目录，将`dongtai_agent_python`文件夹复制至 `DockerVulspace/` 目录下
+从 [IAST 官网](https://iast.huoxian.cn/deploy) 下载 Python Agent
 
-> 注意：项目名称可修改 `dongtai_agent_python/config.json` 中的 `project.name` 或者配置环境变量
+将其解压到 `DockerVulspace/` 目录下
+
+> 注意：项目名称可修改配置文件 `dongtai_agent_python/config.json` 中的 `project.name` 或者配置环境变量
 
 ```shell script
 export projectName=demoProjectName
@@ -58,7 +60,7 @@ export projectName=demoProjectName
 
 ### 软件包镜像加速(可选)
 
-```dockerfile
+```docker-compose.yml
 version: '3.4'
 
 services:
@@ -67,17 +69,19 @@ services:
       args:
         PYPI_MIRROR: https://pypi.tuna.tsinghua.edu.cn/simple
         DEBIAN_MIRROR: mirrors.aliyun.com
-        DEBIAN_SECURITY_MIRROR: mirrors.aliyun.com
 
   flaskweb:
     build:
       args:
         PYPI_MIRROR: https://pypi.tuna.tsinghua.edu.cn/simple
         DEBIAN_MIRROR: mirrors.aliyun.com
-        DEBIAN_SECURITY_MIRROR: mirrors.aliyun.com
 ```
 
 保存以上内容为 `docker-compose.override.yml`, 这样在构建镜像时会使用相对应的软件包镜像, 可根据自身情况设置对应的软件包镜像地址
+
+### 使用最新的 agent 代码
+
+如需使用最新的 agent 代码, 可在上面下载的文件中找到配置文件 `dongtai_agent_python/config.json`, 将其复制至 `DockerVulspace/` 目录下, 然后在 `docker-compose.override.yml` 增加 build args `AGENT_FROM: github`
 
 ### 容器镜像构建
 
