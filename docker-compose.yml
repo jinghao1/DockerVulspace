@@ -48,13 +48,13 @@ services:
 
   djangoweb:
     build:
-      context: ./djangosrc
+      context: .
+      dockerfile: ./djangosrc/Dockerfile
     container_name: mysite.djangoweb
     command: ["/wait-for-it.sh", "mysqldb:3306", "--", "uwsgi", "--socket", ":8001", "--module", "mysite.wsgi"]
     volumes:
       - ./wait-for-it.sh:/wait-for-it.sh
       - ./djangosrc:/code
-      - ./dongtai_agent_python:/code/dongtai_agent_python
       - ./sqlite/db.sqlite3:/code/db.sqlite3
     environment:
       AUTO_CREATE_PROJECT: 1
@@ -68,13 +68,13 @@ services:
 
   flaskweb:
     build:
-      context: ./flasksrc
+      context: .
+      dockerfile: ./flasksrc/Dockerfile
     container_name: mysite.flaskweb
     command: ["/wait-for-it.sh", "mysqldb:3306", "--", "python","-u","-m","flask","run","-h","0.0.0.0"]
     volumes:
       - ./wait-for-it.sh:/wait-for-it.sh
       - ./flasksrc:/code
-      - ./dongtai_agent_python:/code/dongtai_agent_python
       - ./sqlite/db.sqlite3:/code/db.sqlite3
     environment:
       FLASK_APP: app.py
