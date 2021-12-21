@@ -3,7 +3,7 @@
 __pycache__
 
 .idea/
-
+.DS_Store
 DongTai-agent-python
 dongtai_agent_python/
 dongtai_agent_python
