@@ -1,12 +1,12 @@
 *.pyc
 *.pyo
 __pycache__
-
+.DS_Store
 .idea/
 
 DongTai-agent-python
 dongtai_agent_python/
 dongtai_agent_python
 dongtai_agent_python-*.tar.gz
-
+config.json
 docker-compose.override.yml
