@@ -27,8 +27,7 @@ def setup_routes(app):
     app.add_url_rule("/demo/sqlite3_post_executemany_sql", view_func=sql_api.sql_post_executemany_sql, methods=["POST"])
     app.add_url_rule("/demo/sqlite3_post_executescript", view_func=sql_api.sql_post_executescript, methods=["POST"])
     # mongo
-    app.add_url_rule("/demo/mongo_post_excute", view_func=sql_api.mongo_post_excute, methods=["POST"])
-    app.add_url_rule("/demo/mongo_post_many", view_func=sql_api.pysql_post_many, methods=["POST"])
+    app.add_url_rule("/demo/mongo_find", view_func=sql_api.mongo_find, methods=["GET", "POST"])
     # 增加 命令执行
     app.add_url_rule("/demo/exec_post_e", view_func=cmd_api.exec_post_e, methods=["POST"])
     app.add_url_rule("/demo/exec_post_popen", view_func=cmd_api.exec_post_popen, methods=["POST"])
