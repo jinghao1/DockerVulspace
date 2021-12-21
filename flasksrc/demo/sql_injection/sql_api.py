@@ -3,6 +3,7 @@ from demo.model import UserMysql,UserPostgreSQL,Usersqlite
 from flask import Flask,request
 from demo.common import SerializerJsonResponse
 from demo.global_var import dt_get_value
+import pymongo
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -135,3 +136,38 @@ def pysql_post_many():
     db.session.bulk_insert_mappings(UserPostgreSQL, args)
     exec_end = db.session.commit()
     return SerializerJsonResponse({"result": exec_end})
+
+
+# mongo sql excute
+def mongo_post_excute():
+
+    ser = request.form
+
+    if ser:
+        sqlQuery = "db.guser.find({name:song})"
+    else:
+        return SerializerJsonResponse(None, 202, "params error")
+    client = pymongo.MongoClient(host="localhost", port=27017)
+
+    ## 指定数据库
+    db = client.test
+
+    # 指定集合（类似于表）
+    collection = db.guser
+
+    # 插入数据
+    student = {
+        "id": "10001",
+        "name": "Jordan",
+        "age": "20",
+        "gender": "male"
+    }
+    rows = collection.insert_one(student)
+
+    print(rows)
+    if rows:
+        for line in rows:
+            print(line)
+            return SerializerJsonResponse({"phone": line[0]})
+    else:
+        return SerializerJsonResponse({"phone": ""})

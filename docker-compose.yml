@@ -31,7 +31,15 @@ services:
     volumes:
       - mysite.mysqldb.volume:/var/lib/mysql
       - ./mysql:/docker-entrypoint-initdb.d/
-
+  mongo:
+    image: mongo
+    container_name: mysite.mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "mysiteuser"
+      MONGO_INITDB_ROOT_PASSWORD: "mysitepass"
   postgresql:
     image: postgres
     container_name: mysite.postgresql

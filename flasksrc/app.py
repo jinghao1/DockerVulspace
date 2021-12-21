@@ -14,8 +14,8 @@ app.config['SQLALCHEMY_BINDS'] = {
 }
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
-from dongtai_agent_python.middlewares.flask_middleware import AgentMiddleware
-app.wsgi_app = AgentMiddleware(app.wsgi_app, app)
+# from dongtai_agent_python.middlewares.flask_middleware import AgentMiddleware
+# app.wsgi_app = AgentMiddleware(app.wsgi_app, app)
 
 db = SQLAlchemy(app)
 dt_set_value("app",app)

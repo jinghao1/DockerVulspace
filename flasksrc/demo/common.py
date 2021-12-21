@@ -13,6 +13,6 @@ def SerializerJsonResponse(endData=None, status=201, msg="success"):
         "msg": msg,
         "data": [endData]
     }
-
+    # print(res)
     return jsonify(res)
     # return JsonResponse(_SuccessSerializer(res).data)

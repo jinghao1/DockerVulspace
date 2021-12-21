@@ -1,7 +1,7 @@
 *.pyc
 *.pyo
 __pycache__
-.DS_Store
+
 .idea/
 
 DongTai-agent-python

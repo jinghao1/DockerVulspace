@@ -6,6 +6,7 @@ from demo.exec_command import cmd_api
 from demo.xss import xss_fun
 from demo.xxe import xxe_fun
 from demo.ssrf import ssrf_fun
+from demo.deserialization import serializ_api
 
 
 DIR_PATH = dirname(realpath(__file__))
@@ -25,6 +26,9 @@ def setup_routes(app):
     app.add_url_rule("/demo/sqlite3_post", view_func=sql_api.sql_post_r, methods=["POST"])
     app.add_url_rule("/demo/sqlite3_post_executemany_sql", view_func=sql_api.sql_post_executemany_sql, methods=["POST"])
     app.add_url_rule("/demo/sqlite3_post_executescript", view_func=sql_api.sql_post_executescript, methods=["POST"])
+    # mongo
+    app.add_url_rule("/demo/mongo_post_excute", view_func=sql_api.mongo_post_excute, methods=["POST"])
+    app.add_url_rule("/demo/mongo_post_many", view_func=sql_api.pysql_post_many, methods=["POST"])
     # 增加 命令执行
     app.add_url_rule("/demo/exec_post_e", view_func=cmd_api.exec_post_e, methods=["POST"])
     app.add_url_rule("/demo/exec_post_popen", view_func=cmd_api.exec_post_popen, methods=["POST"])
@@ -50,5 +54,13 @@ def setup_routes(app):
     # ssrf urllib
     app.add_url_rule("/demo/urllib_ssrf", view_func=ssrf_fun.urllib_ssrf, methods=["GET"])
     app.add_url_rule("/demo/request_ssrf", view_func=ssrf_fun.request_ssrf, methods=["GET"])
+
+    # deserialization
+    # pickle
+    app.add_url_rule("/demo/make_pickle_data", view_func=serializ_api.makePickleData, methods=["POST"])
+    app.add_url_rule("/demo/get_pickle_data", view_func=serializ_api.getPickleData, methods=["POST"])
+    # marshal
+    app.add_url_rule("/demo/make_marshal_data", view_func=serializ_api.makeMarshalData, methods=["POST"])
+    app.add_url_rule("/demo/get_marshal_data", view_func=serializ_api.getMarshalData, methods=["POST"])
 
 

@@ -1,7 +1,7 @@
 {
   "debug": false,
   "project": {
-    "name": "Python_Demo_Project"
+    "name": "Py_song_1215"
   },
   "iast": {
     "proxy": {
@@ -11,12 +11,12 @@
     },
     "server": {
       "mode": "remote",
-      "token": "42662f1c621ec6b99b52b98b4fea81a70b11a59a",
-      "url": "http://192.168.0.1:8002"
+      "token": "",
+      "url": "https://iast-test.huoxian.cn/openapi"
     },
     "service": {
       "report": {
-        "interval": 600
+        "interval": 20
       },
       "replay": {
         "interval": 300000
