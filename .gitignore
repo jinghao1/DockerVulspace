@@ -10,3 +10,4 @@ dongtai_agent_python
 dongtai_agent_python-*.tar.gz
 config.json
 docker-compose.override.yml
+*.log
