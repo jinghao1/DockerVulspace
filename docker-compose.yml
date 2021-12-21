@@ -24,13 +24,14 @@ services:
     image: mysql:5.7
     container_name: mysite.mysqldb
     ports:
-      - 33060:33060
+      - 33060:3306
     environment:
       MYSQL_ROOT_PASSWORD: mysitepass
       TZ: 'Asia/Shanghai'
     volumes:
       - mysite.mysqldb.volume:/var/lib/mysql
       - ./mysql:/docker-entrypoint-initdb.d/
+
   mongo:
     image: mongo
     container_name: mysite.mongo
@@ -40,6 +41,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: "mysiteuser"
       MONGO_INITDB_ROOT_PASSWORD: "mysitepass"
+
   postgresql:
     image: postgres
     container_name: mysite.postgresql
@@ -73,6 +75,7 @@ services:
     depends_on:
       - mysqldb
       - postgresql
+      - mongo
 
   flaskweb:
     build:
@@ -94,4 +97,5 @@ services:
     depends_on:
       - mysqldb
       - postgresql
+      - mongo
     restart: always

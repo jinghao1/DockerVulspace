@@ -1,4 +1,6 @@
 import os
+
+import pymongo
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from demo.global_var import dt_set_value
@@ -20,6 +22,9 @@ app.wsgi_app = AgentMiddleware(app.wsgi_app, app)
 db = SQLAlchemy(app)
 dt_set_value("app",app)
 dt_set_value("db",db)
+
+mongo_client = pymongo.MongoClient("mongodb://mysiteuser:mysitepass@mongo:27017")
+dt_set_value("mongo_client", mongo_client)
 
 from routes import setup_routes
 setup_routes(app)

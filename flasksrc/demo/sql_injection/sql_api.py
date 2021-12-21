@@ -1,4 +1,7 @@
+import json
 import time
+
+from bson import json_util
 from demo.model import UserMysql,UserPostgreSQL,Usersqlite
 from flask import Flask,request
 from demo.common import SerializerJsonResponse
@@ -138,36 +141,29 @@ def pysql_post_many():
     return SerializerJsonResponse({"result": exec_end})
 
 
-# mongo sql excute
-def mongo_post_excute():
-
-    ser = request.form
-
+# mongo sql find
+def mongo_find():
+    ser = request.args
     if ser:
-        sqlQuery = "db.guser.find({name:song})"
+        # ' || '' == '
+        sql_query = {"$where": "this.name == '%s'" % (ser.get('name', ''),)}
     else:
         return SerializerJsonResponse(None, 202, "params error")
-    client = pymongo.MongoClient(host="localhost", port=27017)
+    client = dt_get_value("mongo_client")
 
-    ## 指定数据库
     db = client.test
-
-    # 指定集合（类似于表）
-    collection = db.guser
-
-    # 插入数据
-    student = {
+    db.drop_collection('user')
+    collection = db.user
+    user = {
         "id": "10001",
         "name": "Jordan",
         "age": "20",
         "gender": "male"
     }
-    rows = collection.insert_one(student)
+    collection.insert_one(user)
 
-    print(rows)
-    if rows:
-        for line in rows:
-            print(line)
-            return SerializerJsonResponse({"phone": line[0]})
+    u = collection.find_one(sql_query)
+    if u:
+        return SerializerJsonResponse(json.loads(json_util.dumps(u)))
     else:
-        return SerializerJsonResponse({"phone": ""})
+        return SerializerJsonResponse(status=201, msg="no data")
