@@ -7,7 +7,7 @@ from demo.xss import xss_fun
 from demo.xxe import xxe_fun
 from demo.ssrf import ssrf_fun
 from demo.deserialization import serializ_api
-from flasksrc.demo.ldap import ldap
+from demo.ldap import ldap
 
 DIR_PATH = dirname(realpath(__file__))
 
