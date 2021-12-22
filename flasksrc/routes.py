@@ -7,7 +7,7 @@ from demo.xss import xss_fun
 from demo.xxe import xxe_fun
 from demo.ssrf import ssrf_fun
 from demo.deserialization import serializ_api
-
+from flasksrc.demo.ldap import ldap
 
 DIR_PATH = dirname(realpath(__file__))
 
@@ -62,4 +62,6 @@ def setup_routes(app):
     app.add_url_rule("/demo/make_marshal_data", view_func=serializ_api.makeMarshalData, methods=["POST"])
     app.add_url_rule("/demo/get_marshal_data", view_func=serializ_api.getMarshalData, methods=["POST"])
 
-
+    # ldap
+    app.add_url_rule("/demo/ldap_search", view_func=ldap.ldap_search, methods=["GET", "POST"])
+    app.add_url_rule("/demo/ldap_safe_search", view_func=ldap.ldap_safe_search, methods=["GET", "POST"])
