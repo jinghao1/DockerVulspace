@@ -65,3 +65,5 @@ def setup_routes(app):
     # ldap
     app.add_url_rule("/demo/ldap_search", view_func=ldap.ldap_search, methods=["GET", "POST"])
     app.add_url_rule("/demo/ldap_safe_search", view_func=ldap.ldap_safe_search, methods=["GET", "POST"])
+    app.add_url_rule("/demo/ldap3_search", view_func=ldap.ldap3_search, methods=["GET", "POST"])
+    app.add_url_rule("/demo/ldap3_safe_search", view_func=ldap.ldap3_safe_search, methods=["GET", "POST"])
