@@ -59,6 +59,9 @@ def setup_routes(app):
     # pickle
     app.add_url_rule("/demo/make_pickle_data", view_func=serializ_api.makePickleData, methods=["POST"])
     app.add_url_rule("/demo/get_pickle_data", view_func=serializ_api.getPickleData, methods=["POST"])
+    # pickle read from file
+    app.add_url_rule("/demo/make_pickle_file", view_func=serializ_api.savePickleInFile, methods=["POST"])
+    app.add_url_rule("/demo/get_pickle_file", view_func=serializ_api.exutePickleFromFile, methods=["POST"])
     # marshal
     app.add_url_rule("/demo/make_marshal_data", view_func=serializ_api.makeMarshalData, methods=["POST"])
     app.add_url_rule("/demo/get_marshal_data", view_func=serializ_api.getMarshalData, methods=["POST"])
