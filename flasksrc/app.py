@@ -11,8 +11,8 @@ curDir = os.path.dirname(__file__)
 sqlitePath = str(os.path.join(curDir, "./db.sqlite3"))
 app.config['SQLALCHEMY_BINDS'] = {
     "sqlite3": "sqlite:///"+sqlitePath,
-    "mysqlDb": "mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8mb4".format("mysiteuser", "mysitepass", "mysqldb", "3306", "mysite"),
-    "pySqlDb": "postgresql://{}:{}@{}:{}/{}".format("mysiteuser", "mysitepass", "postgresql", "5432", "mysite")
+    # "mysqlDb": "mysql+pymysql://{}:{}@{}:{}/{}?charset=utf8mb4".format("mysiteuser", "mysitepass", "mysqldb", "3306", "mysite"),
+    # "pySqlDb": "postgresql://{}:{}@{}:{}/{}".format("mysiteuser", "mysitepass", "postgresql", "5432", "mysite")
 }
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
