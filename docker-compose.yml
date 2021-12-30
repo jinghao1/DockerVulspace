@@ -74,9 +74,11 @@ services:
       - ./djangosrc:/code
       - ./sqlite/db.sqlite3:/code/db.sqlite3
     environment:
+      DEBUG: 1
       AUTO_CREATE_PROJECT: 1
+      PROJECT_NAME: ${PROJECT_NAME:-Python-DockerVulspace-Django}
       PROJECT_VERSION: ${PROJECT_VERSION:-v1.0.0}
-      ENGINE_NAME: "github-vul-test-django"
+      ENGINE_NAME: ${ENGINE_NAME:-github-vul-test-django}
     expose:
       - "8001"
     depends_on:
@@ -97,9 +99,11 @@ services:
       - ./sqlite/db.sqlite3:/code/db.sqlite3
     environment:
       FLASK_APP: app.py
+      DEBUG: 1
       AUTO_CREATE_PROJECT: 1
+      PROJECT_NAME: ${PROJECT_NAME:-Python-DockerVulspace-Flask}
       PROJECT_VERSION: ${PROJECT_VERSION:-v1.0.0}
-      ENGINE_NAME: "github-vul-test-flask"
+      ENGINE_NAME: ${ENGINE_NAME:-github-vul-test-flask}
     expose:
       - "5000"
     depends_on:
@@ -107,4 +111,3 @@ services:
       - postgresql
       - mongo
       - ldap
-    restart: always
