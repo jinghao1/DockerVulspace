@@ -8,7 +8,7 @@ from demo.xxe import xxe_fun
 from demo.ssrf import ssrf_fun
 from demo.deserialization import serializ_api
 from demo.ldap import ldap
-from flasksrc.demo.crypto import crypto
+from demo.crypto import crypto
 
 DIR_PATH = dirname(realpath(__file__))
 
