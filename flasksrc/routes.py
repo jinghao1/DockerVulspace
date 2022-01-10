@@ -8,6 +8,7 @@ from demo.xxe import xxe_fun
 from demo.ssrf import ssrf_fun
 from demo.deserialization import serializ_api
 from demo.ldap import ldap
+from flasksrc.demo.crypto import crypto
 
 DIR_PATH = dirname(realpath(__file__))
 
@@ -70,3 +71,10 @@ def setup_routes(app):
     app.add_url_rule("/demo/ldap_safe_search", view_func=ldap.ldap_safe_search, methods=["GET", "POST"])
     app.add_url_rule("/demo/ldap3_search", view_func=ldap.ldap3_search, methods=["GET", "POST"])
     app.add_url_rule("/demo/ldap3_safe_search", view_func=ldap.ldap3_safe_search, methods=["GET", "POST"])
+
+    # crypto-bad-cipher
+    app.add_url_rule("/demo/crypto/aes", view_func=crypto.pycryptodome_aes, methods=["GET", "POST"])
+    app.add_url_rule("/demo/crypto/blowfish", view_func=crypto.pycryptodome_blowfish, methods=["GET", "POST"])
+    app.add_url_rule("/demo/crypto/des", view_func=crypto.pycryptodomex_des, methods=["GET", "POST"])
+    app.add_url_rule("/demo/cryptox/blowfish", view_func=crypto.pycryptodomex_blowfish, methods=["GET", "POST"])
+    app.add_url_rule("/demo/cryptox/des", view_func=crypto.pycryptodome_des, methods=["GET", "POST"])
