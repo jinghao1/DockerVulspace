@@ -75,6 +75,6 @@ def setup_routes(app):
     # crypto-bad-cipher
     app.add_url_rule("/demo/crypto/aes", view_func=crypto.pycryptodome_aes, methods=["GET", "POST"])
     app.add_url_rule("/demo/crypto/blowfish", view_func=crypto.pycryptodome_blowfish, methods=["GET", "POST"])
-    app.add_url_rule("/demo/crypto/des", view_func=crypto.pycryptodomex_des, methods=["GET", "POST"])
+    app.add_url_rule("/demo/crypto/des", view_func=crypto.pycryptodome_des, methods=["GET", "POST"])
     app.add_url_rule("/demo/cryptox/blowfish", view_func=crypto.pycryptodomex_blowfish, methods=["GET", "POST"])
-    app.add_url_rule("/demo/cryptox/des", view_func=crypto.pycryptodome_des, methods=["GET", "POST"])
+    app.add_url_rule("/demo/cryptox/des", view_func=crypto.pycryptodomex_des, methods=["GET", "POST"])
