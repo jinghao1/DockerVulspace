@@ -23,6 +23,5 @@ RUN if test "x${DEBIAN_MIRROR}" != "x"; then sed -i "s@deb.debian.org@${DEBIAN_M
   && apt install -y libc6-dev gcc make cmake libpq-dev unzip vim \
   && pip install --upgrade pip -i ${PYPI_MIRROR} \
   && pip install -r requirements.txt -i ${PYPI_MIRROR} \
-  && pip install /DongTai-agent-python/ \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*

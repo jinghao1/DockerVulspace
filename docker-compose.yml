@@ -46,7 +46,7 @@ services:
     image: postgres
     container_name: mysite.postgresql
     ports:
-      - 5432:5432
+      - 5433:5432
     environment:
       POSTGRES_DB: "mysite"
       POSTGRES_USER: "mysiteuser"
