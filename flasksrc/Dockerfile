@@ -1,10 +1,10 @@
 ARG AGENT_FROM=local
 
-FROM python:3.6-bullseye as from_github
+FROM python:3.7-bullseye as from_github
 RUN git clone https://github.com/HXSecurity/DongTai-agent-python.git /DongTai-agent-python
 COPY config.example.json config.json* /DongTai-agent-python/dongtai_agent_python/
 
-FROM python:3.6-bullseye as from_local
+FROM python:3.7-bullseye as from_local
 COPY config.example.json ./DongTai-agent-python* /DongTai-agent-python/
 
 FROM from_${AGENT_FROM}
