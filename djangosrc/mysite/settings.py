@@ -64,7 +64,7 @@ REST_FRAMEWORK = {
 
 
 MIDDLEWARE = [
-    'dongtai_agent_python.middlewares.django_middleware.FireMiddleware',
+    # 'dongtai_agent_python.middlewares.django_middleware.FireMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -106,27 +106,27 @@ curDir = os.path.dirname(__file__)
 sqlitePath = str(os.path.join(curDir, "../db.sqlite3"))
 
 DATABASES = {
-        'sqlite3': {
+        'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': sqlitePath,
         },
-        'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'OPTIONS': {'charset': 'utf8mb4'},
-            'USER': "mysiteuser",
-            'NAME': "mysite",
-            'PASSWORD': "mysitepass",
-            'HOST': "mysqldb",
-            'PORT': "3306",
-        },
-        'pysql': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'USER': "mysiteuser",
-            'NAME': "mysite",
-            'PASSWORD': "mysitepass",
-            'HOST': "postgresql",
-            'PORT': "5432",
-        },
+        # 'default': {
+        #     'ENGINE': 'django.db.backends.mysql',
+        #     'OPTIONS': {'charset': 'utf8mb4'},
+        #     'USER': "mysiteuser",
+        #     'NAME': "mysite",
+        #     'PASSWORD': "mysitepass",
+        #     'HOST': "mysqldb",
+        #     'PORT': "3306",
+        # },
+        # 'pysql': {
+        #     'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #     'USER': "mysiteuser",
+        #     'NAME': "mysite",
+        #     'PASSWORD': "mysitepass",
+        #     'HOST': "postgresql",
+        #     'PORT': "5432",
+        # },
     }
 
 

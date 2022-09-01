@@ -2,10 +2,10 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-from flask import Flask
-from flask import request, jsonify
-import json,copy
-from dongtai_agent_python.middlewares.flask_middleware import AgentMiddleware
+# from flask import Flask
+# from flask import request, jsonify
+# import json,copy
+# from dongtai_agent_python.middlewares.flask_middleware import AgentMiddleware
 # import pymysql
 # pymysql.install_as_MySQLdb()
 
@@ -18,7 +18,7 @@ from dongtai_agent_python.middlewares.flask_middleware import AgentMiddleware
 
 # exit()
 
-
+import rasp
 def main():
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'mysite.settings')
