@@ -7,7 +7,7 @@ from rasp.filter import is_http, is_sql
 from rasp.log import logger
 from rasp.processor import extract_printable
 from rasp.smith import smith_hook
-
+from rasp.ext import scope
 if sys.version_info >= (3, 0):
     import builtins
     from urllib.request import urlopen
@@ -17,6 +17,7 @@ else:
 
 logger.info("python probe start")
 
+scope.enter_scope(scope.SCOPE_AGENT)
 subprocess.Popen.__init__ = smith_hook(subprocess.Popen.__init__, 1, 0, constructor=True, can_block=True)
 
 os.system = smith_hook(os.system, 1, 1, can_block=True)

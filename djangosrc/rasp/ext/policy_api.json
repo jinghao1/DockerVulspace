@@ -243,13 +243,6 @@
           "value": "builtins.str.join",
           "inherit": "false"
         },
-        {
-          "source": "P1",
-          "track": "true",
-          "target": "R",
-          "value": "builtins.str.lower",
-          "inherit": "false"
-        },
 
         {
           "source": "P1",
@@ -329,13 +322,7 @@
           "value": "builtins.str.swapcase",
           "inherit": "false"
         },
-        {
-          "source": "P1",
-          "track": "true",
-          "target": "R",
-          "value": "builtins.str.title",
-          "inherit": "false"
-        },
+
         {
           "source": "P1",
           "track": "true",
@@ -343,13 +330,7 @@
           "value": "builtins.str.translate",
           "inherit": "false"
         },
-        {
-          "source": "P1",
-          "track": "true",
-          "target": "R",
-          "value": "builtins.str.upper",
-          "inherit": "false"
-        },
+
         {
           "source": "P1",
           "track": "true",

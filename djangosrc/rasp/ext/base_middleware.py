@@ -26,7 +26,7 @@ class BaseMiddleware(object):
             return
 
         start_time = time.time()
-        scope.enter_scope(scope.SCOPE_AGENT)
+
 
         # middleware id
         self.id = id(self)

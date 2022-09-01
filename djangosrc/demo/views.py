@@ -17,7 +17,6 @@ def func2(filePath,n=3):
     path_arr.append(n)
     return path_arr
 
-
 def func3_open(end_path):
     endData = {}
     print(end_path)
@@ -33,12 +32,6 @@ def func3_open(end_path):
     print(endData)
     return endData
 
-
-@extend_schema_with_envcheck([_FilePathArgsSerializer],
-                             response_schema=_SuccessSerializer,
-                             summary=_('path traversal of get'),
-                             description=_("Get the file content through the get parameter；eg: name=Data**"),
-                             tags=[_('path-traversal')])
 @api_view(['GET'])
 def index_get_r(self):
     filePath = self.GET.get("name", "")

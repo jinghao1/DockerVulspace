@@ -13,6 +13,8 @@ _blocks = {}
 _filters = {}
 _context = local()
 
+from rasp.log import logger
+
 
 def _on_message(message):
     logger.info("message %s", message)
@@ -132,6 +134,7 @@ def smith_hook(
 
         if len(exclude) > 0 and any(pred(rule) for rule in exclude):
             return func(*args, **kwargs)
+
 
         _client.post_message(TRACE_OPERATE, smith_trace)
 

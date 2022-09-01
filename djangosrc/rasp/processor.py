@@ -11,7 +11,8 @@ else:
     from urllib import unquote
 
 _version = platform.python_version()
-
+from rasp.ext.assess import CONTEXT_TRACKER
+from rasp.ext import const,scope,utils
 
 def _base64_encode(data):
     encoded = base64.b64encode(data)
@@ -79,8 +80,9 @@ try:
     @_exception_handler
     def django_request_processor2(*args, **kwargs):
         wsgi_request = args[1]
-        print("test agent =====")
+        print("test agent request====")
         print(wsgi_request)
+        CONTEXT_TRACKER.set_current(RequestContext(wsgi_request))
         return {
                 'frame': 'Django py ' + _version,
                 'url': unquote(wsgi_request.build_absolute_uri()),
@@ -96,3 +98,15 @@ except ImportError:
 
 def extract_printable(data):
     return bytearray(filter(ascii.isprint, bytearray(data))).decode()
+
+
+class RequestContext(object):
+    def __init__(self, request):
+        self.has_source = True
+        self.taint_ids = []
+        self.pool = []
+        self.tags = {}
+
+        self.request = request
+
+        logger.info("hook request success")

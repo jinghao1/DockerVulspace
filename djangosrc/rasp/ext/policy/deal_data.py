@@ -1,7 +1,6 @@
-from rasp.ext.tracker import ContextTracker
+from rasp.ext.assess import CONTEXT_TRACKER
 from rasp.log import logger
 from rasp.ext import const,scope,utils
-CONTEXT_TRACKER = ContextTracker()
 
 
 @scope.with_scope(scope.SCOPE_AGENT)
@@ -17,7 +16,7 @@ def wrap_data(policy_rule, self_obj=None, result=None, come_args=None, come_kwar
 
     if policy_rule.node_type == const.NODE_TYPE_SOURCE:
         context.has_source = True
-    print(policy_rule.signature)
+    print("signature:"+policy_rule.signature)
     print(come_args)
     # tracking = Tracking(policy_rule)
     # tracking.apply(self_obj, result, come_args, come_kwargs)
